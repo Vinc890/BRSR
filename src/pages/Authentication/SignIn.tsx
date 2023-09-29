@@ -70,11 +70,12 @@ const SignIn = () => {
 
           let config = {
         method: 'get',
-        maxBodyLength: Infinity,
+        // maxBodyLength: Infinity,
         url: 'http://15.207.116.57:8090/all_levels',
         headers: { 
-          'Authorization': authToken,
+          'authorization': authToken,
           // 'Authorization': 'A+/f3q4sEEXbZ2Kl174H9mluKIVKf6KyaCXOdc4ZZQnqgpxuP7B+050vm+kdkmsTsLaxLiXqX84=',
+          // 'Content-Type': 'text/plain', 
         }
       };
       
