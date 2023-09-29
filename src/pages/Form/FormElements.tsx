@@ -76,42 +76,38 @@ const FormElements = () => {
   const { register, handleSubmit, getValues, formState } = form;
   const { errors } = formState;
 
-  const onSubmit: SubmitHandler<FormValues> = (data) =>{
-    console.log(data);
-    async function login() {
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log(data);};
 
-      const file = getValues("comp_file")
-  
-  const FormData = require('form-data');
-  let data = new FormData();
-  data.append('file', file[0]);
-  
-  let config = {
-    method: 'post',
-    maxBodyLength: Infinity,
-    url: 'http://15.207.116.57:8090/uploadHierarchies',
-    headers: { 
-      'Authorization': 'A+/f3q4sEEXbZ2Kl174H9mluKIVKf6KyEfcXEOyl5oTqgpxuP7B+050vm+kdkmsTsLaxLiXqX84=', 
-      'Cookie': 'JSESSIONID=766F44D1398C8CE9C06E4D75D80C3A59', 
-      ...data.getHeaders()
-    },
-    data : data
-  };
-  
-  axios.request(config)
-  .then((response) => {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-  
-        
+    async function uploadorg() {
+      const file = getValues('comp_file');
+
+      let data = file;
+      data.append('file', file[0]);
+
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'http://15.207.116.57:8090/uploadHierarchies',
+        headers: {
+          Authorization:
+            'A+/f3q4sEEXbZ2Kl174H9mluKIVKf6KyEfcXEOyl5oTqgpxuP7B+050vm+kdkmsTsLaxLiXqX84=',
+          Cookie: 'JSESSIONID=766F44D1398C8CE9C06E4D75D80C3A59',
+          ...data.getHeaders(),
+        },
+        data: data,
+      };
+
+      axios
+        .request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-  }
-
-
-
+  
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -325,8 +321,8 @@ const FormElements = () => {
               <button
                 type="submit"
                 className=" inline-flex rounded-md items-center w-45 justify-center gap-2.5 bg-primary py-3 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-4"
-                onClick={login}
-                >
+                onClick={uploadorg}
+              >
                 Upload File
               </button>
             </div>

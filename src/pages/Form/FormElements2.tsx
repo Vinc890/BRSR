@@ -49,12 +49,12 @@ const schema = yup.object({
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       ];
       const file = value as File;
-      console.log(value)
+      console.log(value);
       return allowedFormats.includes(value[0].type);
     }),
 });
 
-const FormElements = () => {
+const FormElements2 = () => {
   const form = useForm<FormValues>({
     defaultValues: {
       // comp_name: '',
@@ -76,40 +76,43 @@ const FormElements = () => {
   const { register, handleSubmit, getValues, formState } = form;
   const { errors } = formState;
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log(data);
+  };
 
+    async function uploadusers() {
+        const file = getValues('comp_file');
+        console.log({ file });
+    
+        const FormData = file;
+        let data = new FormData();
+        data.append('file', file[0]);
+    
+        let config = {
+          method: 'post',
+          maxBodyLength: Infinity,
+          url: 'http://15.207.116.57:8090/uploadUsers',
+          headers: {
+            Authorization:
+              'A+/f3q4sEEXbZ2Kl174H9mluKIVKf6KyEfcXEOyl5oTqgpxuP7B+050vm+kdkmsTsLaxLiXqX84=',
+            Cookie: 'JSESSIONID=766F44D1398C8CE9C06E4D75D80C3A59',
+            ...data.getHeaders(),
+          },
+          data: data,
+        };
+    
+        axios
+          .request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+  
 
-  async function upload() {
-
-    const file = getValues("comp_file")
-    console.log({file})
-
-const FormData = file;
-let data = new FormData();
-data.append('file', file[0]);
-
-let config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: 'http://15.207.116.57:8090/uploadUsers',
-  headers: { 
-    'Authorization': 'A+/f3q4sEEXbZ2Kl174H9mluKIVKf6KyEfcXEOyl5oTqgpxuP7B+050vm+kdkmsTsLaxLiXqX84=', 
-    'Cookie': 'JSESSIONID=766F44D1398C8CE9C06E4D75D80C3A59', 
-    ...data.getHeaders()
-  },
-  data : data
-};
-
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
-});
-
-      
-  }
+ 
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -323,8 +326,8 @@ axios.request(config)
               <button
                 type="submit"
                 className=" inline-flex rounded-md items-center w-45 justify-center gap-2.5 bg-primary py-3 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-4"
-                onClick={upload}
-                >
+                onClick={uploadusers}
+              >
                 Upload File
               </button>
             </div>
@@ -335,4 +338,4 @@ axios.request(config)
   );
 };
 
-export default FormElements;
+export default FormElements2;

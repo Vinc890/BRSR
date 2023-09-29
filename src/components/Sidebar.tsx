@@ -152,7 +152,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             fill=""
                           />
                         </svg> */}
-                        <Link to="/forms/form-elements2">Upload Organzational Structure</Link>
+                        <Link to="/forms/form-elements">Upload Organzational Structure</Link>
                       </NavLink>
                       <NavLink
                         to="/dashboard"
